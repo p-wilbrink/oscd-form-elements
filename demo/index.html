@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <style>
+    body {
+      background: #fafafa;
+    }
+  </style>
+</head>
+<body>
+  <div id="demo"></div>
+
+  <script type="module">
+    import { html, render } from 'lit';
+    import '../dist/src/textfield/oscd-textfield.js';
+    import '../dist/src/select/oscd-select.js';
+    import '../dist/src/checkbox/oscd-checkbox.js';
+
+    render(
+      html`
+        <oscd-textfield label="Firstname">
+        </oscd-textfield>
+        <oscd-textfield label="Firstname" required>
+        </oscd-textfield>
+        <oscd-textfield label="Firstname" nullable>
+        </oscd-textfield>
+        <oscd-textfield label="Firstname" nullable defaultValue="John">
+        </oscd-textfield>
+        <oscd-textfield label="Firstname" nullable defaultValue="John" value="Jane">
+        </oscd-textfield>
+        <oscd-select label="Country">
+          <mwc-list-item value="NL">Netherlands</mwc-list-item>
+          <mwc-list-item value="BE">Belgium</mwc-list-item>
+          <mwc-list-item value="UK">United Kingdom</mwc-list-item>
+        </oscd-select>
+        <oscd-select label="Country" defaultValue="BE" nullable>
+          <mwc-list-item value="NL">Netherlands</mwc-list-item>
+          <mwc-list-item value="BE">Belgium</mwc-list-item>
+          <mwc-list-item value="UK">United Kingdom</mwc-list-item>
+        </oscd-select>
+        <oscd-checkbox label="I want to receive all the spam you send me"></oscd-checkbox>
+        <oscd-checkbox label="I want to receive all the spam you send me" nullable></oscd-checkbox>
+        <oscd-checkbox label="I want to receive all the spam you send me" nullable .defaultChecked=${true}></oscd-checkbox>
+      `,
+      document.querySelector('#demo')
+    );
+  </script>
+</body>
+</html>
