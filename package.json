@@ -2,7 +2,9 @@
   "name": "oscd-textfield",
   "description": "Webcomponent oscd-textfield following open-wc recommendations",
   "license": "MIT",
-  "author": "oscd-textfield",
+  "author": {
+    "name": "oscd-textfield"
+  },
   "version": "0.0.0",
   "type": "module",
   "main": "dist/src/index.js",
@@ -20,8 +22,9 @@
     "format": "eslint --ext .ts,.html . --fix --ignore-path .gitignore && prettier \"**/*.ts\" --write --ignore-path .gitignore",
     "test": "tsc && wtr --coverage",
     "test:watch": "tsc && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"wtr --watch\"",
-    "storybook": "tsc && npm run analyze -- --exclude dist && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"wds -c .storybook/server.mjs\"",
-    "storybook:build": "tsc && npm run analyze -- --exclude dist && build-storybook"
+    "storybook": "storybook dev -p 6006",
+    "storybook:build": "tsc && npm run analyze -- --exclude dist && storybook build",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@material/mwc-checkbox": "^0.27.0",
@@ -33,20 +36,31 @@
     "lit": "^2.0.2"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.21.5",
+    "@babel/preset-typescript": "^7.21.5",
     "@custom-elements-manifest/analyzer": "^0.4.17",
     "@open-wc/eslint-config": "^9.2.1",
     "@open-wc/testing": "^3.1.6",
+    "@storybook/addon-essentials": "^7.0.14",
+    "@storybook/addon-links": "^7.0.14",
+    "@storybook/blocks": "^7.0.14",
+    "@storybook/web-components": "^7.0.14",
+    "@storybook/web-components-webpack5": "^7.0.14",
     "@typescript-eslint/eslint-plugin": "^5.48.0",
     "@typescript-eslint/parser": "^5.48.0",
     "@web/dev-server": "^0.1.34",
-    "@web/dev-server-storybook": "^0.5.4",
     "@web/test-runner": "^0.14.0",
+    "chromatic": "^6.17.4",
     "concurrently": "^5.3.0",
     "eslint": "^8.31.0",
     "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-storybook": "^0.6.12",
     "husky": "^4.3.8",
     "lint-staged": "^10.5.4",
     "prettier": "^2.4.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "storybook": "^7.0.14",
     "tslib": "^2.3.1",
     "typescript": "^4.5.2"
   },
@@ -55,7 +69,8 @@
     "parser": "@typescript-eslint/parser",
     "extends": [
       "@open-wc",
-      "prettier"
+      "prettier",
+      "plugin:storybook/recommended"
     ],
     "plugins": [
       "@typescript-eslint"
@@ -89,5 +104,7 @@
       "eslint --fix",
       "prettier --write"
     ]
-  }
+  },
+  "readme": "ERROR: No README data found!",
+  "_id": "oscd-textfield@0.0.0"
 }

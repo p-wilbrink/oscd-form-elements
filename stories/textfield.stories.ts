@@ -2,7 +2,7 @@ import { html, TemplateResult } from 'lit';
 
 import { ifDefined } from 'lit/directives/if-defined.js';
 
-import '../src/textfield/oscd-textfield.js';
+import '../dist/src/textfield/oscd-textfield.js';
 
 export default {
   title: 'OscdTextfield',

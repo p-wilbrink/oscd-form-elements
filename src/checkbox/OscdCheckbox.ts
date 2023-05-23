@@ -1,4 +1,4 @@
-import { html } from 'lit';
+import { html, css } from 'lit';
 import { property, query, state } from 'lit/decorators.js';
 
 // eslint-disable-next-line import/no-duplicates
@@ -79,4 +79,13 @@ export class OscdCheckbox extends OptionalFormControl<Checkbox> {
   firstUpdated(): void {
     this.requestUpdate();
   }
+
+  static styles = css`
+    :host {
+      --mdc-checkbox-checked-color: var(
+        --oscd-color-checkbox-background,
+        var(--oscd-color-secondary)
+      );
+    }
+  `;
 }

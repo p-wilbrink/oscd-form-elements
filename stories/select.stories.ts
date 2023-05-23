@@ -2,7 +2,7 @@ import { html, TemplateResult } from 'lit';
 
 import { ifDefined } from 'lit/directives/if-defined.js';
 
-import '../src/select/oscd-select.js';
+import '../dist/src/select/oscd-select.js';
 
 export default {
   title: 'OscdSelect',

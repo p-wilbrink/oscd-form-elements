@@ -17,6 +17,8 @@
     import '../dist/src/select/oscd-select.js';
     import '../dist/src/checkbox/oscd-checkbox.js';
 
+    import { minLength } from '../dist/src/lib/validation/validation-rules/min-length.js';
+
     render(
       html`
         <oscd-textfield label="Firstname">
@@ -42,9 +44,22 @@
         <oscd-checkbox label="I want to receive all the spam you send me"></oscd-checkbox>
         <oscd-checkbox label="I want to receive all the spam you send me" nullable></oscd-checkbox>
         <oscd-checkbox label="I want to receive all the spam you send me" nullable .defaultChecked=${true}></oscd-checkbox>
+        <button>Click</button>
       `,
       document.querySelector('#demo')
     );
+
+    const button = document.querySelector('button');
+    const textField = document.querySelector('oscd-textfield');
+
+    button.addEventListener('click', () => {
+
+      textField.validationRules.push(
+        minLength(5)
+      )
+
+      textField.reportValidity();
+    });
   </script>
 </body>
 </html>

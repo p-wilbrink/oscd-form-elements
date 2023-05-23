@@ -1,4 +1,4 @@
-import { html } from 'lit';
+import { css, html } from 'lit';
 import { query, state } from 'lit/decorators.js';
 
 // eslint-disable-next-line import/no-duplicates
@@ -24,7 +24,7 @@ export class OscdSelect extends OptionalFormControl<Select> {
   // eslint-disable-next-line class-methods-use-this
   @state()
   get formFieldLabel(): string {
-    return this.label || '';
+    return '';
   }
 
   protected validate(): boolean {
@@ -49,4 +49,34 @@ export class OscdSelect extends OptionalFormControl<Select> {
       ><slot></slot
     ></mwc-select>`;
   }
+
+  static styles = css`
+    :host {
+      --mdc-theme-primary: var(--oscd-color-primary);
+
+      --mdc-select-focused-label-color: var(
+        --oscd-color-select-focus,
+        var(--oscd-color-primary)
+      );
+      --mdc-select-focused-dropdown-icon-color: var(
+        --oscd-color-select-focus,
+        var(--oscd-color-primary)
+      );
+
+      --mdc-select-error-dropdown-icon-color: var(
+        --oscd-color-select-error,
+        var(--oscd-color-state-error)
+      );
+
+      --mdc-select-error-color: var(
+        --oscd-color-select-error,
+        var(--oscd-color-state-error)
+      );
+
+      --mdc-theme-error: var(
+        --oscd-color-select-error,
+        var(--oscd-color-state-error)
+      );
+    }
+  `;
 }

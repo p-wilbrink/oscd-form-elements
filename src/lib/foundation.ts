@@ -61,6 +61,7 @@ export interface FormInputElement<T> {
 export const isFormInputElement = (
   element: any
 ): element is FormInputElement<any> =>
+  element &&
   'checkValidity' in element &&
   'reportValidity' in element &&
   'validity' in element &&

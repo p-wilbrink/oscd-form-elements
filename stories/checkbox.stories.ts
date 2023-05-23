@@ -1,8 +1,6 @@
 import { html, TemplateResult } from 'lit';
 
-import { ifDefined } from 'lit/directives/if-defined.js';
-
-import '../src/checkbox/oscd-checkbox.js';
+import '../dist/src/checkbox/oscd-checkbox.js';
 
 export default {
   title: 'OscdCheckbox',
