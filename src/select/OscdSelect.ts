@@ -24,7 +24,7 @@ export class OscdSelect extends OptionalFormControl<Select> {
   // eslint-disable-next-line class-methods-use-this
   @state()
   get formFieldLabel(): string {
-    return this.label || '';
+    return '';
   }
 
   protected validate(): boolean {

@@ -2,7 +2,9 @@
   "name": "oscd-textfield",
   "description": "Webcomponent oscd-textfield following open-wc recommendations",
   "license": "MIT",
-  "author": "oscd-textfield",
+  "author": {
+    "name": "oscd-textfield"
+  },
   "version": "0.0.0",
   "type": "module",
   "main": "dist/src/index.js",
@@ -22,7 +24,8 @@
     "test:watch": "tsc && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"wtr --watch\"",
     "storybook": "storybook dev -p 6006",
     "storybook:build": "tsc && npm run analyze -- --exclude dist && storybook build",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "chromatic": "npx chromatic --project-token=chpt_8eb4c2cfabb1c6f"
   },
   "dependencies": {
     "@material/mwc-checkbox": "^0.27.0",
@@ -102,5 +105,7 @@
       "eslint --fix",
       "prettier --write"
     ]
-  }
+  },
+  "readme": "ERROR: No README data found!",
+  "_id": "oscd-textfield@0.0.0"
 }
