@@ -24,8 +24,7 @@
     "test:watch": "tsc && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"wtr --watch\"",
     "storybook": "storybook dev -p 6006",
     "storybook:build": "tsc && npm run analyze -- --exclude dist && storybook build",
-    "build-storybook": "storybook build",
-    "chromatic": "npx chromatic --project-token=chpt_8eb4c2cfabb1c6f"
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@material/mwc-checkbox": "^0.27.0",
