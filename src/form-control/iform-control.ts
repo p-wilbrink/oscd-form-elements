@@ -1,3 +1,5 @@
+import { ValidatorFn } from '../lib/validation/index.js';
+
 export interface IFormControl {
   value: string;
   required?: boolean;
@@ -11,4 +13,5 @@ export interface IFormControl {
   maxLength?: number;
   suffix?: string;
   helperPersistent?: boolean;
+  validationRules?: ValidatorFn[];
 }

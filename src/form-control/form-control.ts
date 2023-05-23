@@ -2,6 +2,8 @@ import { LitElement, TemplateResult } from 'lit';
 
 import { property, state } from 'lit/decorators.js';
 import { isFormInputElement } from '../lib/foundation.js';
+import { validate, ValidationResult } from '../lib/validation/validate.js';
+import { ValidatorFn } from '../lib/validation/validator-fn.js';
 import { IFormControl } from './iform-control.js';
 
 export abstract class FormControl<T extends HTMLElement>
@@ -11,7 +13,22 @@ export abstract class FormControl<T extends HTMLElement>
   @property({
     type: String,
   })
-  value: string = '';
+  set value(value: string) {
+    this._value = value;
+
+    if (isFormInputElement(this.formControl)) {
+      this.formControl.value = value;
+    }
+  }
+
+  get value(): string {
+    console.log('Getting value');
+    return isFormInputElement(this.formControl)
+      ? this.formControl.value
+      : this._value;
+  }
+
+  private _value: string = '';
 
   @property({
     type: Boolean,
@@ -78,9 +95,6 @@ export abstract class FormControl<T extends HTMLElement>
   })
   helperPersistent: boolean = false;
 
-  @property({ type: Array })
-  reservedValues: string[] = [];
-
   @state()
   get valid(): boolean {
     return isFormInputElement(this.formControl)
@@ -88,20 +102,16 @@ export abstract class FormControl<T extends HTMLElement>
       : this.validate();
   }
 
+  @property({
+    type: Array,
+  })
+  validationRules: ValidatorFn[] = [];
+
   protected abstract validate(): boolean;
 
   public checkValidity(): boolean {
-    if (
-      this.reservedValues &&
-      this.reservedValues.some(array => array === this.value)
-    ) {
-      this.setCustomValidity('textfield.unique');
-      return false;
-    }
-    this.setCustomValidity('');
-
     if (isFormInputElement(this.formControl)) {
-      this.formControl.checkValidity();
+      return this.formControl.checkValidity();
     }
 
     return true;
@@ -110,11 +120,29 @@ export abstract class FormControl<T extends HTMLElement>
   public abstract setCustomValidity(validity: string): void;
 
   public reportValidity(): boolean {
-    const res = this.checkValidity();
+    if (isFormInputElement(this.formControl)) {
+      const validationResult: ValidationResult = validate(
+        this.formControl,
+        this.validationRules
+      );
+      if (!validationResult.valid) {
+        this.setCustomValidity(validationResult.messages[0]);
+      }
 
-    return isFormInputElement(this.formControl)
-      ? this.formControl.reportValidity()
-      : res;
+      this.formControl.reportValidity();
+      return validationResult.valid;
+    }
+
+    const validationResult: ValidationResult = validate(
+      this,
+      this.validationRules
+    );
+
+    if (!validationResult.valid) {
+      this.setCustomValidity(validationResult.messages[0]);
+    }
+
+    return validationResult.valid;
   }
 
   public get validity(): ValidityState | undefined {
