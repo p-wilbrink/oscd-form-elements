@@ -1,4 +1,4 @@
-import { html } from 'lit';
+import { css, html } from 'lit';
 import { query, state } from 'lit/decorators.js';
 
 // eslint-disable-next-line import/no-duplicates
@@ -41,4 +41,11 @@ export class OscdTextfield extends OptionalFormControl<TextField> {
       .validationMessage=${this.validationMessage}
     ></mwc-textfield>`;
   }
+
+  static styles = css`
+    :host {
+      --mdc-theme-primary: var(--oscd-color-primary);
+      --mdc-theme-error: var(--oscd-color-state-error);
+    }
+  `;
 }

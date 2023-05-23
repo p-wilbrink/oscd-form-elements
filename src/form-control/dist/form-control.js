@@ -43,7 +43,6 @@ var FormControl = /** @class */ (function (_super) {
     }
     Object.defineProperty(FormControl.prototype, "value", {
         get: function () {
-            console.log('Getting value');
             return foundation_js_1.isFormInputElement(this.formControl)
                 ? this.formControl.value
                 : this._value;

@@ -22,7 +22,6 @@ export abstract class FormControl<T extends HTMLElement>
   }
 
   get value(): string {
-    console.log('Getting value');
     return isFormInputElement(this.formControl)
       ? this.formControl.value
       : this._value;
