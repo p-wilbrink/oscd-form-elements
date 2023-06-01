@@ -29,7 +29,7 @@ interface ArgTypes {
   nullable?: boolean;
   helper?: string;
   validationMessage?: string;
-  checked?: boolean;
+  checked: boolean;
   slot: TemplateResult;
 }
 
@@ -64,6 +64,4 @@ Regular.args = {
   required: false,
   helper: 'Helper text',
   validationMessage: 'Validation Message',
-  slot: html`<mwc-list-item value="1">1</mwc-list-item
-    ><mwc-list-item value="2">2</mwc-list-item>`,
 };

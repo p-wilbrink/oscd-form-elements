@@ -1,23 +1,28 @@
 import { html } from 'lit';
 import { fixture, expect } from '@open-wc/testing';
 
-import { OscdTextfield } from '../src/textfield/OscdTextfield.js';
-import '../src/textfield/oscd-textfield.js';
+import { OscdSelect } from '../src/select/OscdSelect.js';
+import '../src/select/oscd-select.js';
 import { OptionalFormControl } from '../src/form-control/optional-form-control.js';
 
-describe('oscd-textfield', () => {
+describe('oscd-select', () => {
   const createElement = async (
-    options: Partial<OptionalFormControl>
-  ): Promise<OscdTextfield> => {
-    const el = await fixture<OscdTextfield>(
-      html`<oscd-textfield
+    options: Partial<OptionalFormControl>,
+    values: string[]
+  ): Promise<OscdSelect> => {
+    const el = await fixture<OscdSelect>(
+      html`<oscd-select
         .value=${options.value || ''}
         .maybeValue=${options.maybeValue}
         .defaultValue=${options.defaultValue || ''}
         ?disabled=${options.disabled}
         ?nullable=${options.nullable}
         ?required=${options.required}
-      ></oscd-textfield>`
+      >
+        ${values.map(
+          value => html`<mwc-list-item .value=${value}>value</mwc-list-item>`
+        )}
+      </oscd-select>`
     );
 
     return el;
@@ -26,9 +31,12 @@ describe('oscd-textfield', () => {
   it('has value', async () => {
     const value: string = 'TEST VALUE';
 
-    const el = await createElement({
-      value,
-    });
+    const el = await createElement(
+      {
+        value,
+      },
+      ['TEST', 'TEST VALUE']
+    );
 
     expect(el.value).to.deep.equal(value);
   });
@@ -36,33 +44,45 @@ describe('oscd-textfield', () => {
   it('has maybeValue', async () => {
     const maybeValue: string = 'TEST VALUE';
 
-    const el = await createElement({
-      maybeValue,
-    });
+    const el = await createElement(
+      {
+        maybeValue,
+      },
+      ['TEST', 'TEST VALUE']
+    );
 
     expect(el.maybeValue).to.deep.equal(maybeValue);
   });
 
   it('is disabled', async () => {
-    const el = await createElement({
-      disabled: true,
-    });
+    const el = await createElement(
+      {
+        disabled: true,
+      },
+      ['TEST', 'TEST VALUE']
+    );
 
     expect(el.disabled).is.true;
   });
 
   it('is required', async () => {
-    const el = await createElement({
-      required: true,
-    });
+    const el = await createElement(
+      {
+        required: true,
+      },
+      ['TEST', 'TEST VALUE']
+    );
 
     expect(el.required).is.true;
   });
 
   it('is nullable', async () => {
-    const el = await createElement({
-      nullable: true,
-    });
+    const el = await createElement(
+      {
+        nullable: true,
+      },
+      ['TEST', 'TEST VALUE']
+    );
 
     expect(el.nullable).is.true;
     expect(el.shadowRoot?.querySelector('mwc-switch')).to.have.property(
@@ -74,9 +94,12 @@ describe('oscd-textfield', () => {
   it('Has default value', async () => {
     const defaultValue: string = 'DEFAULT VALUE';
 
-    const el = await createElement({
-      defaultValue,
-    });
+    const el = await createElement(
+      {
+        defaultValue,
+      },
+      ['TEST', 'TEST VALUE']
+    );
 
     expect(el.defaultValue).to.equal(defaultValue);
   });
@@ -84,10 +107,13 @@ describe('oscd-textfield', () => {
   it('Has value on maybeValue', async () => {
     const maybeValue: string = 'VALUE';
 
-    const el = await createElement({
-      maybeValue,
-      nullable: true,
-    });
+    const el = await createElement(
+      {
+        maybeValue,
+        nullable: true,
+      },
+      ['TEST', 'VALUE']
+    );
 
     await el.updateComplete;
 
@@ -98,11 +124,14 @@ describe('oscd-textfield', () => {
     const defaultValue: string = 'DEFAULT_VALUE';
     const value: string = 'VALUE';
 
-    const el = await createElement({
-      value,
-      defaultValue,
-      nullable: true,
-    });
+    const el = await createElement(
+      {
+        value,
+        defaultValue,
+        nullable: true,
+      },
+      ['TEST', 'VALUE', 'DEFAULT_VALUE']
+    );
 
     await el.updateComplete;
 
@@ -115,5 +144,25 @@ describe('oscd-textfield', () => {
     await el.updateComplete;
 
     expect(el.value).to.equal(defaultValue);
+  });
+
+  it('should report validity', async () => {
+    const el = await createElement(
+      {
+        maybeValue: undefined,
+        required: true,
+      },
+      ['TEST', 'TEST VALUE']
+    );
+
+    await el.updateComplete;
+
+    expect(el.validationMessage).is.empty;
+
+    const isValid = el.reportValidity();
+
+    await el.updateComplete;
+
+    expect(isValid).to.be.false;
   });
 });

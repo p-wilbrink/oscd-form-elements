@@ -7,9 +7,9 @@ import '@material/mwc-textfield';
 // eslint-disable-next-line import/no-duplicates
 import { TextField } from '@material/mwc-textfield';
 
-import { OptionalFormControl } from '../form-control/optional-form-control.js';
+import { OptionalFormControlImpl } from '../form-control/optional-form-control.impl.js';
 
-export class OscdTextfield extends OptionalFormControl<TextField> {
+export class OscdTextfield extends OptionalFormControlImpl<TextField> {
   @query('mwc-textfield')
   formControl!: TextField;
 

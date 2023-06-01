@@ -1,5 +1,5 @@
 {
-  "name": "oscd-textfield",
+  "name": "@openscd/oscd-form-elements",
   "description": "Webcomponent oscd-textfield following open-wc recommendations",
   "license": "MIT",
   "author": {
@@ -11,7 +11,9 @@
   "module": "dist/src/index.js",
   "exports": {
     ".": "./dist/src/index.js",
-    "./oscd-textfield.js": "./dist/src/oscd-textfield.js"
+    "./oscd-textfield.js": "./dist/src/textfield/oscd-textfield.js",
+    "./oscd-select.js": "./dist/src/select/oscd-select.js",
+    "./oscd-checkbox.js": "./dist/src/checkbox/oscd-checkbox.js"
   },
   "scripts": {
     "analyze": "cem analyze --litelement",
@@ -61,6 +63,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "storybook": "^7.0.14",
+    "storybook-design-token": "^3.0.0-beta.3",
     "tslib": "^2.3.1",
     "typescript": "^4.5.2"
   },

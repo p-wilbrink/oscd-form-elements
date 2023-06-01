@@ -21,9 +21,9 @@
 
     render(
       html`
-        <oscd-textfield label="Firstname">
+        <oscd-textfield label="Firstname" @focus=${() => console.log('focused')} @blur=${() => console.log('blur')} @input=${() => console.log('on input')} @invalid=${() => console.log('invalid')}>
         </oscd-textfield>
-        <oscd-textfield label="Firstname" required>
+        <oscd-textfield label="Firstname" required @invalid=${() => console.log('invalid')}>
         </oscd-textfield>
         <oscd-textfield label="Firstname" nullable>
         </oscd-textfield>

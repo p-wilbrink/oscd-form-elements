@@ -7,9 +7,15 @@ import { Checkbox } from '@material/mwc-checkbox';
 // eslint-disable-next-line import/no-duplicates
 import '@material/mwc-checkbox';
 
-import { OptionalFormControl } from '../form-control/optional-form-control.js';
+import { OptionalFormControlImpl } from '../form-control/optional-form-control.impl.js';
 
-export class OscdCheckbox extends OptionalFormControl<Checkbox> {
+/**
+ *
+ * @cssprop --oscd-checkbox-theme-background - Controls the color of the checkbox
+ * @cssprop --oscd-theme-secondary - Fallback for --oscd-checkbox-theme-background
+ *
+ */
+export class OscdCheckbox extends OptionalFormControlImpl<Checkbox> {
   // eslint-disable-next-line class-methods-use-this, @typescript-eslint/no-unused-vars
   public setCustomValidity(validity: string): void {
     // Do nothing
@@ -20,6 +26,9 @@ export class OscdCheckbox extends OptionalFormControl<Checkbox> {
     return true;
   }
 
+  /**
+   * @prop {boolean} defaultChecked - Checkbox should be checked by default
+   */
   @property({ type: Boolean })
   defaultChecked = false;
 
@@ -51,7 +60,7 @@ export class OscdCheckbox extends OptionalFormControl<Checkbox> {
     return true;
   }
 
-  renderFormControl() {
+  protected renderFormControl() {
     return html`<mwc-checkbox
       ?checked=${this.checked}
       ?disabled=${this.deactivateCheckbox || this.disabled}
@@ -83,8 +92,8 @@ export class OscdCheckbox extends OptionalFormControl<Checkbox> {
   static styles = css`
     :host {
       --mdc-checkbox-checked-color: var(
-        --oscd-color-checkbox-background,
-        var(--oscd-color-secondary)
+        --oscd-checkbox-theme-background,
+        var(--oscd-theme-secondary)
       );
     }
   `;

@@ -1,26 +1,26 @@
 import { html, TemplateResult } from 'lit';
 
-import { IFormControl } from '../form-control/iform-control.js';
-import { IOptionalFormControl } from '../form-control/ioptional-form-control.js';
+import { FormControl } from '../form-control/form-control.js';
+import { OptionalFormControl } from '../form-control/optional-form-control.js';
 
 export type FormControlType = 'textfield' | 'select' | 'checkbox';
 
 export const newTextfield = (
-  blueprint: IOptionalFormControl
+  blueprint: OptionalFormControl
 ): TemplateResult => html`<oscd-textfield
   .value=${blueprint.value}
   .defaultValue=${blueprint.defaultValue || ''}
 ></oscd-textfield>`;
 
 export const newSelect = (
-  blueprint: IOptionalFormControl
+  blueprint: OptionalFormControl
 ): TemplateResult => html`<oscd-select
   .value=${blueprint.value}
   .defaultValue=${blueprint.defaultValue || ''}
 ></oscd-select>`;
 
 export const newCheckbox = (
-  blueprint: IOptionalFormControl
+  blueprint: OptionalFormControl
 ): TemplateResult => html`<oscd-checkbox
   .value=${blueprint.value}
   .defaultValue=${blueprint.defaultValue || ''}
@@ -28,19 +28,19 @@ export const newCheckbox = (
 
 export const newFormControl = (
   type: FormControlType,
-  blueprint: IFormControl
+  blueprint: FormControl
 ): TemplateResult => {
   let result: TemplateResult = html``;
 
   switch (type) {
     case 'textfield':
-      result = newTextfield(blueprint as IOptionalFormControl);
+      result = newTextfield(blueprint as OptionalFormControl);
       break;
     case 'select':
-      result = newSelect(blueprint as IOptionalFormControl);
+      result = newSelect(blueprint as OptionalFormControl);
       break;
     case 'checkbox':
-      result = newCheckbox(blueprint as IOptionalFormControl);
+      result = newCheckbox(blueprint as OptionalFormControl);
       break;
     default:
       result = html``;

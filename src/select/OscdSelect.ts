@@ -7,9 +7,9 @@ import '@material/mwc-select';
 // eslint-disable-next-line import/no-duplicates
 import { Select } from '@material/mwc-select';
 
-import { OptionalFormControl } from '../form-control/optional-form-control.js';
+import { OptionalFormControlImpl } from '../form-control/optional-form-control.impl.js';
 
-export class OscdSelect extends OptionalFormControl<Select> {
+export class OscdSelect extends OptionalFormControlImpl<Select> {
   public setCustomValidity(validity: string): void {
     this.formControl.setCustomValidity(validity);
   }
